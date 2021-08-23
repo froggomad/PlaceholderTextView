@@ -36,6 +36,7 @@ public class PlaceholderTextView: UITextView {
     }
     
     private func commonInit() {
+        self.text = placeholder
         textColor = disabledColor
     }
 }
