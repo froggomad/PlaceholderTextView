@@ -1,18 +1,22 @@
 import UIKit
 
-public protocol PlaceholderTextViewDelegate: UITextViewDelegate { }
+public protocol PlaceholderTextViewDelegateProtocol: UITextViewDelegate { }
+public class PlaceholderTextViewDelegate: NSObject, PlaceholderTextViewDelegateProtocol {
+    
+}
 
-public extension PlaceholderTextViewDelegate {
+
+extension PlaceholderTextViewDelegate {
     private var disabledColor: UIColor { .systemGray2 }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    public func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == disabledColor {
             textView.text = nil
             textView.textColor = .black
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
+    public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Placeholder"
             textView.textColor = disabledColor
