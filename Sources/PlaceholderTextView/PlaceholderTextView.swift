@@ -1,28 +1,8 @@
 import UIKit
 
-public protocol PlaceholderTextViewDelegate: UITextViewDelegate { }
-
-
-extension PlaceholderTextViewDelegate {
-    private var disabledColor: UIColor { .systemGray2 }
-    
-    public func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == disabledColor {
-            textView.text = nil
-            textView.textColor = .black
-        }
-    }
-    
-    public func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "Placeholder"
-            textView.textColor = disabledColor
-        }
-    }
-    
-}
-
 public class PlaceholderTextView: UITextView {
+    private var disabledColor: UIColor = .systemGray2
+    
     public var placeholder: String {
         didSet {
             if text.isEmpty {
@@ -31,10 +11,21 @@ public class PlaceholderTextView: UITextView {
         }
     }
     
-    public required init(placeholder: String, delegate: PlaceholderTextViewDelegate, frame: CGRect = .zero) {
+    public override var text: String! {
+        didSet {
+            if textColor == disabledColor {
+                text = nil
+                textColor = .black
+            } else if text.isEmpty {
+                text = "Placeholder"
+                textColor = disabledColor
+            }
+        }
+    }
+    
+    public required init(placeholder: String, frame: CGRect = .zero) {
         self.placeholder = placeholder
         super.init(frame: frame, textContainer: nil)
-        self.delegate = delegate
         commonInit()
     }
     
