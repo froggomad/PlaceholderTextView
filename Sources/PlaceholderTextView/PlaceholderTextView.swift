@@ -17,7 +17,7 @@ public class PlaceholderTextView: UITextView {
                 text = nil
                 textColor = .black
             } else if text.isEmpty {
-                text = "Placeholder"
+                text = placeholder
                 textColor = disabledColor
             }
         }
@@ -36,6 +36,6 @@ public class PlaceholderTextView: UITextView {
     }
     
     private func commonInit() {
-        
+        textColor = disabledColor
     }
 }
