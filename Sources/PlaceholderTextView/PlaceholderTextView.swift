@@ -1,9 +1,6 @@
 import UIKit
 
-public protocol PlaceholderTextViewDelegateProtocol: UITextViewDelegate { }
-public class PlaceholderTextViewDelegate: NSObject, PlaceholderTextViewDelegateProtocol {
-    
-}
+public protocol PlaceholderTextViewDelegate: UITextViewDelegate { }
 
 
 extension PlaceholderTextViewDelegate {
