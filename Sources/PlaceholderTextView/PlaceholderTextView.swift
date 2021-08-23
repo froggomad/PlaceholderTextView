@@ -1,8 +1,8 @@
 import UIKit
 
-protocol PlaceholderTextViewDelegate: UITextViewDelegate { }
+public protocol PlaceholderTextViewDelegate: UITextViewDelegate { }
 
-extension PlaceholderTextViewDelegate {
+public extension PlaceholderTextViewDelegate {
     private var disabledColor: UIColor { .systemGray2 }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -21,8 +21,8 @@ extension PlaceholderTextViewDelegate {
     
 }
 
-class PlaceholderTextView: UITextView {
-    var placeholder: String {
+public class PlaceholderTextView: UITextView {
+    public var placeholder: String {
         didSet {
             if text.isEmpty {
                 text = placeholder
@@ -30,14 +30,14 @@ class PlaceholderTextView: UITextView {
         }
     }
     
-    required init(placeholder: String, delegate: PlaceholderTextViewDelegate, frame: CGRect = .zero) {
+    public required init(placeholder: String, delegate: PlaceholderTextViewDelegate, frame: CGRect = .zero) {
         self.placeholder = placeholder
         super.init(frame: frame, textContainer: nil)
         self.delegate = delegate
         commonInit()
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         self.placeholder = ""
         super.init(coder: coder)
         commonInit()
