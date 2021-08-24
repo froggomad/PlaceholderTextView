@@ -6,7 +6,8 @@ public protocol PlaceholderTextViewDelegate: UIResponder {
 }
 
 public class PlaceholderTextView: UITextView {
-    weak var placeholderTextViewDelegate: PlaceholderTextViewDelegate?
+    weak var placeholderTextViewDelegate: PlaceholderTextViewDelegate!
+    weak var view: UIView!
     
     private var disabledColor: UIColor = .systemGray2
     
@@ -14,6 +15,7 @@ public class PlaceholderTextView: UITextView {
         let tap = UITapGestureRecognizer(target: placeholderTextViewDelegate, action: #selector(resignFirstResponder))
         tap.numberOfTouchesRequired = 1
         tap.numberOfTapsRequired = 1
+        view?.addGestureRecognizer(tap)
         
         let center = NotificationCenter.default
         let queue = OperationQueue.main
@@ -52,7 +54,8 @@ public class PlaceholderTextView: UITextView {
         }
     }
     
-    public required init(delegate: PlaceholderTextViewDelegate, placeholder: String, frame: CGRect = .zero) {
+    public required init(delegate: PlaceholderTextViewDelegate, view: UIView, placeholder: String, frame: CGRect = .zero) {
+        self.view = view
         self.placeholderTextViewDelegate = delegate
         self.placeholder = placeholder
         super.init(frame: frame, textContainer: nil)
