@@ -20,9 +20,9 @@ public class PlaceholderTextView: UITextView {
         center.addObserver(forName: didBeginEditing, object: self, queue: queue) { [weak self] _ in
             guard let self = self else { return }
             
-            if self.text.isEmpty {
-                self.text = self.placeholder
-                self.textColor = self.disabledColor
+            if self.textColor == self.disabledColor {
+                self.text = nil
+                self.textColor = .black
             }
             
             self.placeholderTextViewDelegate?.didBeginEditing()
@@ -31,7 +31,7 @@ public class PlaceholderTextView: UITextView {
         center.addObserver(forName: didEndEditing, object: self, queue: queue) { [weak self] _ in
             guard let self = self else { return }
             
-            if self.textColor == self.disabledColor {
+            if self.text.isEmpty {
                 self.text = self.placeholder
                 self.textColor = self.disabledColor
             }
