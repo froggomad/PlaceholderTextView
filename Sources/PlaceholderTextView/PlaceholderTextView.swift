@@ -14,15 +14,29 @@ public class PlaceholderTextView: UITextView {
         
         let center = NotificationCenter.default
         let queue = OperationQueue.main
-        let didEndEditing = Self.textDidEndEditingNotification
         let didBeginEditing = Self.textDidBeginEditingNotification
-        
-        center.addObserver(forName: didEndEditing, object: self, queue: queue) { [weak self] _ in
-            self?.placeholderTextViewDelegate?.didEndEditing()
+        let didEndEditing = Self.textDidEndEditingNotification
+                
+        center.addObserver(forName: didBeginEditing, object: self, queue: queue) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if self.text.isEmpty {
+                self.text = self.placeholder
+                self.textColor = self.disabledColor
+            }
+            
+            self.placeholderTextViewDelegate?.didBeginEditing()
         }
         
-        center.addObserver(forName: didBeginEditing, object: self, queue: queue) { [weak self] _ in
-            self?.placeholderTextViewDelegate?.didBeginEditing()
+        center.addObserver(forName: didEndEditing, object: self, queue: queue) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if self.textColor == self.disabledColor {
+                self.text = self.placeholder
+                self.textColor = self.disabledColor
+            }
+            
+            self.placeholderTextViewDelegate?.didEndEditing()
         }
         
     }
