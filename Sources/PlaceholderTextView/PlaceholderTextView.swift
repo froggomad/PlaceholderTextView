@@ -12,7 +12,7 @@ public class PlaceholderTextView: UITextView {
     private var disabledColor: UIColor = .systemGray2
     
     private func listen() {
-        let tap = UITapGestureRecognizer(target: placeholderTextViewDelegate, action: #selector(resignFirstResponder))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(resignFirstResponder))
         tap.numberOfTouchesRequired = 1
         tap.numberOfTapsRequired = 1
         view?.addGestureRecognizer(tap)
