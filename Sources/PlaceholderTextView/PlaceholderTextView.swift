@@ -1,6 +1,6 @@
 import UIKit
 
-public protocol PlaceholderTextViewDelegate: UIView {
+public protocol PlaceholderTextViewDelegate: UIResponder {
     func didEndEditing()
     func didBeginEditing()
 }
