@@ -35,18 +35,6 @@ public class PlaceholderTextView: UITextView {
         }
     }
     
-    public override var text: String! {
-        didSet {
-            if textColor == disabledColor {
-                text = nil
-                textColor = .black
-            } else if text.isEmpty {
-                text = placeholder
-                textColor = disabledColor
-            }
-        }
-    }
-    
     public required init(delegate: PlaceholderTextViewDelegate, placeholder: String, frame: CGRect = .zero) {
         self.placeholderTextViewDelegate = delegate
         self.placeholder = placeholder
